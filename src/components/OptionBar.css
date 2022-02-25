@@ -1,14 +1,19 @@
-.option-bar {
-  background-color: #000;
-  width: 100%;
-}
-
 .option-bar-icon {
+  padding: 3%;
   width: 26px;
   height: 26px;
   filter: invert(93%) sepia(1%) saturate(0%) hue-rotate(151deg) brightness(88%) contrast(85%);
+  cursor: pointer;
 }
 
-.nav-link.active > .option-bar-icon {
+.nav-link-highlight {
+  padding: 0;
+}
+
+.nav-link-highlight.active > .option-bar-icon {
   filter: invert(82%) sepia(33%) saturate(2300%) hue-rotate(330deg) brightness(102%) contrast(101%);
+}
+
+.nav-link-highlight.active {
+  border-bottom: 2px solid rgb(175, 122, 42);
 }

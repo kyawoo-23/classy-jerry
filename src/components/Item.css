@@ -31,3 +31,7 @@
   vertical-align: middle;
   line-height: 20px;
 }
+
+.card-price {
+  white-space: nowrap;
+}

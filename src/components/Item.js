@@ -27,7 +27,7 @@ export default function Item() {
               </Card.Text>
             </Col>
             <Col xs={3} md={2}>
-              <Card.Text>
+              <Card.Text className='card-price'>
                 $45
               </Card.Text>
             </Col>
@@ -52,7 +52,7 @@ export default function Item() {
               </Card.Text>
             </Col>
             <Col xs={3} md={2}>
-              <Card.Text>
+              <Card.Text className='card-price'>
                 $45
               </Card.Text>
             </Col>
@@ -77,7 +77,7 @@ export default function Item() {
               </Card.Text>
             </Col>
             <Col xs={3} md={2}>
-              <Card.Text>
+              <Card.Text className='card-price'>
                 $45
               </Card.Text>
             </Col>

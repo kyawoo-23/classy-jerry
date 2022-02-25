@@ -23,23 +23,23 @@ export default function NavBar() {
           aria-controls="offcanvasNavbar" 
           onClick={() => setShowCanvas(true)} 
         />
-        <Navbar.Brand className='me-auto ms-5' href="/">ClassyJerry</Navbar.Brand>
-        <LinkContainer to="/cart" className='me-2'>
+        <Navbar.Brand className='me-auto ms-2' href="/">ClassyJerry</Navbar.Brand>
+        <LinkContainer to="/cart">
           <Nav.Link className='nav-link-highlight'>
             <img src={cartIcon} className='nav-icon' alt='cart-icon'/>
           </Nav.Link>
         </LinkContainer>
-        <LinkContainer to="/favorite" className='me-2'>
+        <LinkContainer to="/favorite">
           <Nav.Link className='nav-link-highlight'>
             <img src={favIcon} className='nav-icon' alt='fav-icon'/>
           </Nav.Link>
         </LinkContainer>
-        <LinkContainer to="/search" className='me-2'>
+        <LinkContainer to="/search">
           <Nav.Link className='nav-link-highlight'>
             <img src={searchIcon} className='nav-icon' alt='search-icon'/>
           </Nav.Link>
         </LinkContainer>
-        
+      
         <Navbar.Offcanvas
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"

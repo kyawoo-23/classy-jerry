@@ -9,10 +9,26 @@
 }
 
 .item-name {
+  width: 200px;
   white-space: nowrap; 
-  width: 18rem;
   text-overflow: ellipsis; 
   overflow: hidden;
+}
+
+@media only screen and (min-width: 600px) {
+  .item-name {
+    width: 300px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .item-name {
+    width: 270px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .item-name {
+    width: 360px;
+  }
 }
 
 .card-item-detail {

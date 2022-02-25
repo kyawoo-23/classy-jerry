@@ -14,7 +14,7 @@ export default function CartItem() {
           <div className='card-item-detail ms-2'>
             <Stack>
               <div className='card-item-detail-1'>
-                <h3>Long Dress</h3>
+                <h3 className='item-name'>Long Dress</h3>
                 <CloseButton className='me-3' variant='white' />
               </div>
               <div className='card-item-detail-2'>
@@ -39,7 +39,7 @@ export default function CartItem() {
           <div className='card-item-detail ms-2'>
             <Stack>
               <div className='card-item-detail-1'>
-                <h3>Long Dress</h3>
+                <h3 className='item-name'>Long Dress</h3>
                 <CloseButton className='me-3' variant='white' />
               </div>
               <div className='card-item-detail-2'>
@@ -64,7 +64,7 @@ export default function CartItem() {
           <div className='card-item-detail ms-2'>
             <Stack>
               <div className='card-item-detail-1'>
-                <h3>Long Dress</h3>
+                <h3 className='item-name'>Long Dress</h3>
                 <CloseButton className='me-3' variant='white' />
               </div>
               <div className='card-item-detail-2'>

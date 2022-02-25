@@ -4,11 +4,12 @@
 
 .navbar {
   background-color: #000 !important;
+  flex-wrap: nowrap !important;
 }
 
 .nav-icon {
-  height: 32px;
-  width: 32px;
+  height: 30px;
+  width: 30px;
   filter: invert(93%) sepia(1%) saturate(0%) hue-rotate(151deg) brightness(88%) contrast(85%);
 }
 
