@@ -1,0 +1,17 @@
+.category-option {
+  display: flex;
+  background-color: #fff;
+  border-radius: .25rem;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.category-option span {
+  margin-left: 20px;
+  padding-right: 20px;
+  font-weight: 500;
+}
+
+.category-title {
+  text-transform: capitalize;
+}
