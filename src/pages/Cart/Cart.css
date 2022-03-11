@@ -1,0 +1,88 @@
+.cart {
+  margin-bottom: 70px;
+}
+
+.settle-now-btn-group {
+  border-top: 1px solid #36342F;
+  background-color: #1B1A17;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 8%;
+}
+
+.settle-now-btn {
+  border-radius: 10px;
+  background-color: #FFB037;
+  border: 1px solid #FFB037;
+  outline: none;
+  font-size: 22px;
+  font-weight: 400;
+  width: 280px;
+  height: 3rem;
+}
+
+.total-price {
+  font-size: 18px;
+  color: #fff;
+}
+
+.cart-item {
+  background-color: #36342F;
+}
+
+.cart-item-img {
+  height: 140px;
+  width: 140px;
+  padding: 5px;
+}
+
+.card-item-detail {
+  width: 100%;
+}
+
+.card-item-detail-1, .card-item-detail-2, .card-item-detail-3 {
+  display: flex;
+  color: #f2f2f2;
+}
+
+.card-item-detail-1 {
+  justify-content: space-between;
+}
+
+.card-item-detail-3 {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-price {
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.item-quantity {
+  padding: 0 10px;
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.item-btn-group {
+  background-color: #FFB037;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.item-btn {
+  background-color: #fff;
+  height: 36px;
+  width: 36px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 500;
+}

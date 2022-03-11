@@ -1,0 +1,17 @@
+.input-group .form-control.search-bar {
+  background-color: #1B1A17;
+  color: #fbfbfb;
+  border-color: #FFB037;
+  opacity: 0.8;
+}
+
+.input-group .form-control.search-bar:focus {
+  border-color: #FFB037;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.input-group .form-control.search-bar:active {
+  border-color: none;
+  box-shadow: none;
+}
