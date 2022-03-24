@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './NavBar.css'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import { LinkContainer } from 'react-router-bootstrap'
-import { useAuthContext } from '../../hooks/useAuthContext'
 import { useLogout } from '../../hooks/useLogout'
+import { useDocOnSnapshot } from '../../hooks/useDocOnSnapshot'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 import cartIcon from '../../icons/353439_basket_purse_shopping_cart_ecommerce_icon.svg'
 import favIcon from '../../icons/211673_heart_icon.svg'
@@ -16,23 +17,35 @@ import homeIcon from '../../icons/326656_home_icon.svg'
 import ordersIcon from '../../icons/truck-solid.svg'
 import loginIcon from '../../icons/login_icon.svg'
 import logoutIcon from '../../icons/logout_icon.svg'
+import logo from '../../icons/logo.svg'
 
 export default function NavBar() {
   const [showCanvas, setShowCanvas] = useState(false)
-  const { user } = useAuthContext()
   const { logout, isPending, error } = useLogout()
+  const { user } = useAuthContext()
+  const { document } = useDocOnSnapshot("users", user ? user.uid : 'no-user')
+
+  useEffect(() => {
+    
+  }, [user, document])
 
   return (
-    <Navbar variant='dark' expand={false}>
+    <Navbar variant='dark' expand={false} sticky="top">
       <Container>
         <Navbar.Toggle 
           aria-controls="offcanvasNavbar" 
           onClick={() => setShowCanvas(true)} 
         />
-        <Navbar.Brand className='me-auto ms-2' href="/">ClassyJerry</Navbar.Brand>
+        <Navbar.Brand className='me-auto ms-2' href="/">
+          <img className='nav-logo ms-md-3 me-2 me-md-3' src={logo} alt='logo'/>
+          Classy Jerry
+        </Navbar.Brand>
         <LinkContainer to="/cart">
-          <Nav.Link className='nav-link-highlight'>
+          <Nav.Link className='nav-link-highlight d-flex align-items-start'>
             <img src={cartIcon} className='nav-icon' alt='cart-icon'/>
+            {user && document && document.cart && document.cart.length !== 0 && (
+              <span className='cart-quantity'>{document.cart.length}</span>
+            )}
           </Nav.Link>
         </LinkContainer>
         <LinkContainer to="/wishlist">
@@ -84,7 +97,7 @@ export default function NavBar() {
               </LinkContainer>
               <LinkContainer 
                 className='menu-link'
-                to="/favorite" 
+                to="/wishlist" 
                 onClick={() => setShowCanvas(false)}
               >
                 <Nav.Link>

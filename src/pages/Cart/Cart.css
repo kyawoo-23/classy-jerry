@@ -86,3 +86,8 @@
   font-size: 20px;
   font-weight: 500;
 }
+
+.modal-divider {
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
+}

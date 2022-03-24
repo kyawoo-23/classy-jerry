@@ -9,8 +9,11 @@ import Orders from './pages/Orders/Orders'
 import Login from './pages/Login/Login'
 import Categories from './pages/Categories/Categories'
 import ItemDetails from './pages/ItemDetails/ItemDetails'
+import OrderDetails from './pages/Orders/OrderDetails' 
 import Admin from './pages/Admin'
-import { useAuthContext } from './hooks/useAuthContext';
+import { useAuthContext } from './hooks/useAuthContext'
+import AdminUpdate from './pages/AdminUpdate';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const { authIsReady, user } = useAuthContext()
@@ -19,7 +22,7 @@ function App() {
     <div className='App'>
       {authIsReady && (
         <BrowserRouter>
-          <NavBar />
+          <NavBar/>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/categories' element={<Navigate replace to='/categories/all' />} />
@@ -36,12 +39,17 @@ function App() {
             <Route path='/orders' 
               element={user ? <Orders /> : <Navigate replace to='/login' />} 
             />
+            <Route path='/orders/details' 
+              element={user ? <OrderDetails /> : <Navigate replace to='/login' />} 
+            />
             <Route path='/login' 
               element={user ? <Navigate replace to='/' /> : <Login />} 
             />
             <Route path='/admin' element={<Admin />} />
+            <Route path='/admin-update' element={<AdminUpdate />} />
             <Route path='/*' element={<Navigate replace to='/' />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       )}
     </div>

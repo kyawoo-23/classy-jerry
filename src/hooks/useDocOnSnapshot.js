@@ -1,24 +1,19 @@
 import { useState, useEffect } from "react"
 import { db } from "../firebase/config"
-import { collection, onSnapshot } from "firebase/firestore"
+import { doc, onSnapshot } from "firebase/firestore"
 
-export const useCollection = (col) => {
-  const [documents, setDocuments] = useState(null)
+export const useDocOnSnapshot = (col, id) => {
+  const [document, setDocument] = useState(null)
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
 
   useEffect(() => {
-    let colRef = collection(db, col)
+    let colRef = doc(db, col, id)
     setIsPending(true)
 
-    const unsub = onSnapshot(colRef, snapshot => {
-      let results = []
-      snapshot.docs.forEach(doc => {
-        results.push({ ...doc.data(), id: doc.id })
-      })
-      
+    const unsub = onSnapshot(colRef, doc => {
       // update state
-      setDocuments(results)
+      setDocument(doc.data())
       setError(null)
       setIsPending(false)
     }, (err) => {
@@ -29,7 +24,7 @@ export const useCollection = (col) => {
 
     // unsub on unmount
     return () => unsub()
-  }, [col])
+  }, [col, id])
 
-  return { documents, error, isPending }
+  return { document, error, isPending }
 }

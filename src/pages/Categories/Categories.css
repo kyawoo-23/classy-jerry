@@ -1,4 +1,7 @@
 .option-bar {
   background-color: #000;
   width: 100%;
+  position: sticky;
+  top: 62px;
+  z-index: 1;
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { db } from "../firebase/config"
 import { collection, onSnapshot, query, orderBy, limit } from "firebase/firestore"
 
-export const useCollection2 = (col, count) => {
+export const useCollection2 = (col, count, orderDesc) => {
   const [documents, setDocuments] = useState([])
   const [prevDocuments, setPrevDocuments] = useState([])
   const [error, setError] = useState(null)
@@ -13,7 +13,7 @@ export const useCollection2 = (col, count) => {
   const colRef = collection(db, col)
 
   useEffect(() => {
-    const q = query(colRef, orderBy('timestamp', 'desc'), limit(showingItems));
+    const q = query(colRef, orderBy('timestamp', orderDesc ? 'desc' : 'asc'), limit(showingItems))
     setIsPending(true)
 
     const unsub = onSnapshot(q, snapshot => {
@@ -25,7 +25,8 @@ export const useCollection2 = (col, count) => {
       setDocuments(results)
       setError(null)
       setIsPending(false)
-      setShowingItems(showingItems + count)
+      setShowingItems(showingItems)
+
     }, (err) => {
       setError('Could not fetch data')
       console.log(err.message)
@@ -34,12 +35,11 @@ export const useCollection2 = (col, count) => {
 
     // unsub on unmount
     return () => unsub()
-  }, [col])
+  }, [col, orderDesc])
 
   const seeMore = () => {      
-    console.log(showingItems)
-    const q = query(colRef, orderBy('timestamp', 'desc'), limit(showingItems));
-
+    // console.log(showingItems)
+    const q = query(colRef, orderBy('timestamp', orderDesc ? 'desc' : 'asc'), limit(showingItems + count))
     const unsub = onSnapshot(q, snapshot => {
       let results = []
       snapshot.docs.forEach(doc => {

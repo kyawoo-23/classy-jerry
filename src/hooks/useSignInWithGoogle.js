@@ -31,10 +31,13 @@ export const useSignInWithGoogle = () => {
         await setDoc(colRef, {
           displayName: res.user.displayName,
           photoURL: res.user.photoURL,
+          cart: null,
+          wishList: null
         })
       }
       // dispatch login action
       dispatch({ type: 'LOGIN', payload: res.user })
+      // window.location.reload()
       // update state
       if (!isCancelled) {
         setError(null)

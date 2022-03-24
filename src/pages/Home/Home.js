@@ -1,21 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Home.css'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Spinner from 'react-bootstrap/Spinner'
-import Button from 'react-bootstrap/Button'
 import CategoryOption from '../../components/CategoryOption/CategoryOption'
 import Item from '../../components/Item/Item'
-import { useCollection } from '../../hooks/useCollection'
 import { useCollection2 } from '../../hooks/useCollection2'
 import { useViewport } from '../../hooks/useViewport'
+import arrow from '../../icons/arrow.svg'
 
 export default function Home() {
   const { width } = useViewport()
   const breakpoint = 992
-  let count = null
-  width < breakpoint ? count = 2 : count = 3 
-  const { documents, isPending, seeMore, showSeeMoreBtn } = useCollection2('itemsList', count)
+  let count = width < breakpoint ? 4 : 6 
+  const [orderDesc, setOrderDesc] = useState(true)
+  const { documents, isPending, seeMore, showSeeMoreBtn } = useCollection2('itemsList', count, orderDesc)
+  const [isNewest, setIsNewest] = useState(true)
+
+  const handleSort = () => {
+    setIsNewest(!isNewest)
+    setOrderDesc(!orderDesc)
+  }
 
   return (
     <Container>
@@ -23,7 +28,17 @@ export default function Home() {
       <Row>
         {['all', 'top', 'bottom', 'headwear', 'shoes', 'accessories'].map((option, idx) => <CategoryOption option={option} key={idx} /> )}
       </Row>
-      <h2 className='main-title'>Items</h2>
+      <div className='d-flex justify-content-between align-items-center'>
+        <h2 className='main-title'>Items</h2>
+        <button onClick={handleSort} className='sort-btn'>
+          <img 
+            className={'arrow-icon me-1 ' + (isNewest ? '' : 'reverse')} 
+            src={arrow} 
+            alt={isNewest ? 'newest icon' : 'oldest icon'} 
+          />
+          {isNewest ? 'Newest' : 'Oldest'}
+        </button>
+      </div>
       <Row>
         {isPending && <Spinner className='mx-auto' animation="grow" variant="warning" /> }
         {!isPending && documents && documents.map((doc, idx) => (

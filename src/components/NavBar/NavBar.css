@@ -7,6 +7,16 @@
   flex-wrap: nowrap !important;
 }
 
+.nav-logo {
+  width: 30px;
+  height: 30px;
+}
+
+.navbar-toggler:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .nav-icon {
   height: 30px;
   width: 30px;
@@ -22,7 +32,15 @@
 }
 
 .nav-link-highlight.active {
-  border-bottom: 2px solid rgb(175, 122, 42);
+  border-bottom: 2px solid #af7a2a;
+}
+
+.cart-quantity {
+  background-color: #362711;
+  color: #FFB037;
+  border-radius: 100px;
+  padding: 2px 4px;
+  font-weight: 600;
 }
 
 .offcanvas-body{

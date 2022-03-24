@@ -8,17 +8,25 @@ import Carousel from 'react-bootstrap/Carousel'
 import Form from 'react-bootstrap/Form'
 import Spinner from 'react-bootstrap/Spinner'
 import { useGetDoc } from '../../hooks/useGetDoc'
+import { useFirestore } from '../../hooks/useFirestore'
+import { useAuthContext } from '../../hooks/useAuthContext'
 import heartNull from '../../icons/heart-null.png'
 import heart from '../../icons/heart.png'
+import { db } from "../../firebase/config"
+import { doc, onSnapshot } from "firebase/firestore"
 
 export default function ItemDetails() {
   const { id } = useParams()
+  const { user } = useAuthContext()
   const { document, isPending, error } = useGetDoc('itemsList', id)
   const [activeSize, setActiveSize] = useState(0)
   const [activeColor, setActiveColor] = useState(0)
   const [itemSize, setItemSize] = useState(null)
   const [itemColor, setItemColor] = useState(null)
   const [itemQty, setItemQty] = useState(1)
+  const { updateAndAddItem, isAddingToCart, isAddingToWishList, updateAndRemoveItem } = useFirestore()
+  const [userItems, setUserItems] = useState(null)
+  const [isWishList, setIsWishList] = useState(false)
 
   const handleColor = (color, idx) => {
     setItemColor(color)
@@ -36,44 +44,65 @@ export default function ItemDetails() {
 
   const handleWishList = e => {
     e.preventDefault()
-    console.log(id)
+    updateAndAddItem("users", id, "wishList")
+    setIsWishList(true)
+  }
+
+  const handleRemove = e => {
+    e.preventDefault()
+    updateAndRemoveItem('users', id, 'wishList')
+    setIsWishList(false)
   }
 
   const handleAdd = e => {
     e.preventDefault()
-    console.log(id, itemColor, itemSize, itemQty)
+    console.log(itemColor, itemSize, itemQty)
+    updateAndAddItem("users", id, "cart", itemColor, itemSize, itemQty)
   }
 
   useEffect(() => {
     if (document) {
-      {document.availableColors.sort().reverse().slice(0).map((color, idx) => (
+      document.availableColors.sort().reverse().slice(0).map((color, idx) => (
         idx === 0 ? setItemColor(color) : null
-      ))}
-      {document.availableSizes.sort().reverse().slice(0).map((size, idx) => (
+      ))
+      document.availableSizes.sort().reverse().slice(0).map((size, idx) => (
         idx === 0 ? setItemSize(size) : null
-      ))}
+      ))
     }
+
+    let uid = user ? user.uid : 'no-user'
+    let colRef = doc(db, 'users', uid)
+    const unsub = onSnapshot(colRef, doc => {
+      // update state
+      setUserItems(doc.data())
+    }, (err) => {
+      console.log(err.message)
+    })
+
+    user && userItems && userItems.wishList && userItems.wishList.map(wishItem => wishItem.itemId).includes(id) ? setIsWishList(true) : setIsWishList(false)
+    // unsub on unmount
+    return () => unsub()
   }, [document])
 
   return (
     <Container>
       <Row>
         {isPending && <Spinner className='mx-auto mt-5' animation="grow" variant="warning"/>}
-        {document && (
+        {!isPending && document && (
           <>
             <Col xs={12} md={6}>
               <Carousel 
                 variant="dark" 
                 fade 
-                indicators={document.photoURL.length === 1 ? false : true} 
-                controls={document.photoURL.length === 1 ? false : true}
+                // indicators={document.photoURL.length === 1 ? false : true} 
+                // controls={document.photoURL.length === 1 ? false : true}
               >
                 <Carousel.Item>
-                    <img
-                      className="d-block w-100"
-                      src={document.primaryImgURL.url}
-                      alt='Slide 1'
-                    />
+                  <img
+                    className="d-block w-100"
+                    src={document.primaryImgURL.url}
+                    alt='Slide 1'
+                  />
                 </Carousel.Item>
                 {document.photoURL.map((url, idx) => (
                   <Carousel.Item key={idx}>
@@ -143,14 +172,38 @@ export default function ItemDetails() {
               </div>
               <Row>
                 <Col xs={6}>
-                  <button onClick={handleWishList} className="fav-btn">Wishlist</button>
+
+                  <button 
+                    onClick={(e) => !user ? 
+                      window.location.href='/login' : ( isWishList ? 
+                        handleRemove(e) : handleWishList(e)
+                    )} 
+                    className={"wish-btn " + (isWishList ? "wishListed" : "")}
+                    disabled={isAddingToWishList}
+                  >
+                    {isAddingToWishList ? 'Adding' : (
+                      isWishList ? 'Included' : 'WishList'
+                    )}
+                  </button>
                 </Col>
                 <Col xs={6}>
-                  <button onClick={handleAdd} className="submit-btn">Add to Cart</button>
+                  <button 
+                    onClick={(e) => !user ? 
+                      window.location.href='/login' :
+                      handleAdd(e)
+                    } 
+                    className="submit-btn"
+                    disabled={isAddingToCart}  
+                  >
+                    {isAddingToCart ? 'Adding' : 'Add to Cart'}
+                  </button>
                 </Col>
               </Row>               
             </Col>
           </>
+        )}
+        {!isPending && !document && (
+          <p className='text-white text-center mt-5'>No data found</p>
         )}
       </Row>
     </Container>
