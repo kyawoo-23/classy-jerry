@@ -7,13 +7,13 @@ import Cart from './pages/Cart/Cart'
 import WishList from './pages/WishList/WishList'
 import Orders from './pages/Orders/Orders'
 import Login from './pages/Login/Login'
+import Signup from './pages/Signup/Signup'
 import Categories from './pages/Categories/Categories'
 import ItemDetails from './pages/ItemDetails/ItemDetails'
 import OrderDetails from './pages/Orders/OrderDetails' 
 import Admin from './pages/Admin'
 import { useAuthContext } from './hooks/useAuthContext'
-import AdminUpdate from './pages/AdminUpdate';
-import Footer from './components/Footer/Footer';
+import AdminUpdate from './pages/AdminUpdate'
 
 function App() {
   const { authIsReady, user } = useAuthContext()
@@ -45,11 +45,13 @@ function App() {
             <Route path='/login' 
               element={user ? <Navigate replace to='/' /> : <Login />} 
             />
+            <Route path='/signup' 
+              element={user ? <Navigate replace to='/' /> : <Signup />} 
+            />
             <Route path='/admin' element={<Admin />} />
             <Route path='/admin-update' element={<AdminUpdate />} />
             <Route path='/*' element={<Navigate replace to='/' />} />
           </Routes>
-          <Footer />
         </BrowserRouter>
       )}
     </div>

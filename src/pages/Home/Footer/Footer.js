@@ -1,12 +1,12 @@
 import React from 'react'
 import './Footer.css'
-import wave from '../../icons/wave-haikei.svg'
-import logo from '../../icons/logo.svg'
+import wave from '../../../icons/wave-haikei.svg'
+import logo from '../../../icons/logo.svg'
 
 export default function Footer() {
   return (
     <>
-      <img className='wave mt-5' src={wave} />
+      <img className='wave mt-5' src={wave} alt='wave'/>
       <footer>
         <p className='text-white text-center'>
           <img className='nav-logo me-3' src={logo} alt='logo' />

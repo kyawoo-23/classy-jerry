@@ -1,40 +1,50 @@
 import React, { useState } from 'react'
-import './Login.css'
+import './Signup.css'
 import { Link } from 'react-router-dom'
 import Stack from 'react-bootstrap/Stack'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
-import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
-import { useSignInWithGoogle } from '../../hooks/useSignInWithGoogle'
-import loginPic from '../../icons/undraw_female_avatar_w3jk.svg'
+import InputGroup from 'react-bootstrap/InputGroup'
+import Spinner from 'react-bootstrap/Spinner'
+import signupPic from '../../icons/undraw_nature_m5ll.svg'
 import eye from '../../icons/eye.png'
 import hidden from '../../icons/hidden.png'
-import InputGroup from 'react-bootstrap/InputGroup'
-import { useLogin } from '../../hooks/useLogin'
+import { useSignup } from '../../hooks/useSignup'
 import { useViewport } from '../../hooks/useViewport'
 import Error from '../../components/Error/Error'
 
-export default function Login() {
-  const { googleSignIn, gError, isLoading } = useSignInWithGoogle()
+export default function Signup() {
   const [email, setEmail] = useState('')
+  const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [showPwd, setShowPwd] = useState(false)
-  const { login, error, isPending } = useLogin()
+  const [file, setFile] = useState(null)
+  const { signup, isPending, error } = useSignup()
   const { width } = useViewport()
   const breakpoint = 992
   let isSmall = width < breakpoint ? true : false
 
+  const handleFileChange = e => {
+    setFile(null)
+    let selected = e.target.files[0]
+    if (!selected.type.includes('image')) {
+      alert('Selected file must be an image')
+      return
+    }
+    setFile(selected)
+  }
+
   const handleSubmit = e => {
     e.preventDefault()
-    login(email, password)
+    signup(email, userName, file, password)
   }
 
   return (
     <Container>
       <Stack className='login-form'>
-        <img className='mx-auto mb-3' style={{width: '110px', height: '110px'}} src={loginPic} alt='login-pic' />
-        <h4 className='text-white text-center'>Login to your Account</h4>
+        <img className='mx-auto mb-3' style={{width: '110px', height: '110px'}} src={signupPic} alt='signup-pic' />
+        <h4 className='text-white text-center'>Create your new Account Now!</h4>
         <Form className='w-75 pt-3 p-md-3 mx-auto' onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label className='text-white'>Email address</Form.Label>
@@ -44,6 +54,26 @@ export default function Login() {
               placeholder="Enter email" 
               value={email}
               onChange={e => setEmail(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicText">
+            <Form.Label className='text-white'>User Name</Form.Label>
+            <Form.Control 
+              size={isSmall ? 'sm' : 'md'}
+              type="text" 
+              placeholder="Enter user name" 
+              value={userName}
+              onChange={e => setUserName(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicFile">
+            <Form.Label className='text-white'>Profile Image</Form.Label>
+            <Form.Control 
+              size={isSmall ? 'sm' : 'md'}
+              type="file" 
+              onChange={handleFileChange}
               required
             />
           </Form.Group>
@@ -69,14 +99,14 @@ export default function Login() {
           </Form.Group>
           <div className='d-flex justify-content-between align-items-center'>
             <Form.Text className='text-white'>
-              New user? 
-              <Link to='/signup'>
-                <span className='text-warning ms-1'>Sign up here!</span>
+              Have an account?
+              <Link to='/login'>
+                <span className='text-warning ms-1'>Log in</span>
               </Link>
             </Form.Text>
             {!isPending && 
               <Button className='px-md-4' variant="outline-warning" type="submit">
-                <span style={{whiteSpace: 'nowrap'}}>Login</span>
+                <span style={{whiteSpace: 'nowrap'}}>Sign up</span>
               </Button>
             }
             {isPending && 
@@ -95,15 +125,6 @@ export default function Login() {
           </div>
           {error && <Error err={error} />}
         </Form>
-        <hr className='login-form-hr'/>
-        <button 
-          className={`mx-auto mt-4 login-with-google-btn ${isLoading ? "no-click" : ""}`} 
-          onClick={googleSignIn}
-          disabled={isLoading}
-        >
-          {isLoading ? 'Loading data...' : 'Sign in with Google'}
-        </button> 
-        {gError && <Error err={gError} />}
       </Stack>
     </Container>
   )

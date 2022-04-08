@@ -3,8 +3,6 @@ import './Item.css'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import heartNull from '../../icons/heart-null.png'
-import heart from '../../icons/heart.png'
 import { Link } from 'react-router-dom'
 
 export default function Item({ doc }) {
@@ -17,30 +15,14 @@ export default function Item({ doc }) {
             src={doc.primaryImgURL.url} 
             alt={`${doc.name} img`} 
           />
-          {/* <div className='card-overlay'>
-            <Card.Title>
-              {false ? (
-                <img className='card-icon heart-null' src={heartNull} />
-              ) : (
-                <button onClick={() => console.log('hi')}>
-                <img className='card-icon heart' src={heart} />
-                </button>
-              )}
-            </Card.Title>
-          </div> */}
-          <Card.Body>
-            <Row>
-              <Col xs={9} md={10}>
-                <Card.Text>
-                  {doc.name}
-                </Card.Text>
-              </Col>
-              <Col xs={3} md={2}>
-                <Card.Text className='card-price'>
-                  <span>$</span>{doc.price}
-                </Card.Text>
-              </Col>
-            </Row>
+          <Card.Body className='d-flex justify-content-between'>
+            <Card.Text className='me-1'>
+              {doc.name}
+            </Card.Text>
+            <Card.Text>
+              <span>$</span>
+              <b>{doc.price}</b>
+            </Card.Text>
           </Card.Body>
         </Card>
       </Link>

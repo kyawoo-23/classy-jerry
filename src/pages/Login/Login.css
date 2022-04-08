@@ -3,10 +3,20 @@
   padding: 1rem;
 }
 
+.eye-icon {
+  height: 17px;
+  width: 17px;
+  filter: invert(10%) sepia(10%) saturate(420%) hue-rotate(7deg) brightness(93%) contrast(99%);
+}
+
 @media only screen and (min-width: 992px) {
   .login-form {
     padding: 2rem;
     padding-top: 1rem;
+  }
+  .eye-icon {
+    height: 22px;
+    width: 22px;
   }
 }
 

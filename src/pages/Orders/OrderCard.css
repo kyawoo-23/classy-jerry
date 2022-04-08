@@ -25,6 +25,33 @@
   margin-left: 5px;
 }
 
+.order-id {
+  width: 180px;
+  margin-right: 5px;
+  white-space: nowrap; 
+  overflow-y: auto;
+  cursor: grab;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+  /* text-overflow: ellipsis;  */
+}
+
+.order-id::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .order-id {
+    width: 380px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .order-id {
+    width: 380px;
+  }
+}
+
 .order-details-left p {
   margin-bottom: 0;
   color: #f2f2f2;

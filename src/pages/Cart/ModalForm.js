@@ -50,9 +50,12 @@ export default function ModalForm(props) {
         phone,
         address,
         items: props.document.cart,
-        itemDetails: itemSysDetails,
+        itemDetails: itemSysDetails.map(({timestamp, ...item}) => {
+          return item
+        }),
         orderAt,
-        note
+        note,
+        orderStatus: 'review'
       }
       await updateDoc(doc(db, 'users', user.uid), {
         phone,
@@ -175,11 +178,9 @@ export default function ModalForm(props) {
           {success ? (
             <>
               <Link to='/'>
-                <Button onClick={clearCart} variant="outline-warning" type="submit">Home</Button>
+                <Button onClick={clearCart} variant="outline-warning">Home</Button>
               </Link>
-              
-                <Button onClick={toOrderDetails} variant="warning" type="submit">Order Details</Button>
-              
+              <Button onClick={toOrderDetails} variant="warning">Order Details</Button>
             </>
           ) : (
             <>

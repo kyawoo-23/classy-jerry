@@ -40,7 +40,7 @@ export default function OrderCard({ doc }) {
           </div>
           <div className='order-details'>
             <div className='order-details-left'>
-              <p><b>Order ID : {doc.orderId}</b></p>
+              <p className='order-id'><b>Order ID : {doc.orderId}</b></p>
               <p><small>
                 [ {doc.items.length} ] item{doc.items.length > 1 && 's'}
               </small></p>
@@ -52,7 +52,7 @@ export default function OrderCard({ doc }) {
               </div>
             </div>
             <div className='order-details-right'>
-              <h5>Total <span>$</span>{doc.totalAmount}</h5>
+              <h6>Total <span>$</span>{doc.totalAmount}</h6>
               <Button 
                 variant='outline-warning' 
                 style={{width: '82px'}}
@@ -65,8 +65,32 @@ export default function OrderCard({ doc }) {
         </Stack>
         <hr style={{margin: '5px', marginBottom: '0' ,background: '#f2f2f2'}} />
         <p className='order-status'>
-          <small>
-            Status: <span>Packaging</span>
+        <small>
+            Status : 
+            {doc.orderStatus === 'review' && (
+              <span 
+                style={{ textTransform: 'capitalize', color: '#11d67b' }}
+                className='ms-1'
+              >
+                {doc.orderStatus}ing
+              </span>
+            )}
+            {doc.orderStatus === 'deliver' && (
+              <span 
+                style={{ textTransform: 'capitalize', color: '#FFB037' }}
+                className='ms-1'
+              >
+                {doc.orderStatus}ing
+              </span>
+            )}
+            {doc.orderStatus === 'complete' && (
+              <span
+                style={{ textTransform: 'capitalize', color: '#66ff00'}}
+                className='ms-1'
+              >
+                {doc.orderStatus}d
+              </span>
+            )}
           </small>
         </p>
       </div>

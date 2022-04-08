@@ -10,8 +10,6 @@ import Spinner from 'react-bootstrap/Spinner'
 import { useGetDoc } from '../../hooks/useGetDoc'
 import { useFirestore } from '../../hooks/useFirestore'
 import { useAuthContext } from '../../hooks/useAuthContext'
-import heartNull from '../../icons/heart-null.png'
-import heart from '../../icons/heart.png'
 import { db } from "../../firebase/config"
 import { doc, onSnapshot } from "firebase/firestore"
 

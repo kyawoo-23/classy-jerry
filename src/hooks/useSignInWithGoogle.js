@@ -6,12 +6,12 @@ import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore'
 
 export const useSignInWithGoogle = () => {
   const [isCancelled, setIsCancelled] = useState(false)
-  const [error, setError] = useState(null)
-  const [isPending, setIsPending] = useState(false)
+  const [gError, setGError] = useState(null)
+  const [isLoading, setisLoading] = useState(false)
   const { dispatch } = useAuthContext()
 
   const googleSignIn = async () => {
-    setIsPending(true)
+    setisLoading(true)
     try {
       const res = await signInWithPopup(auth, googleAuth)
       // console.log(res.user)
@@ -37,25 +37,24 @@ export const useSignInWithGoogle = () => {
       }
       // dispatch login action
       dispatch({ type: 'LOGIN', payload: res.user })
-      // window.location.reload()
       // update state
       if (!isCancelled) {
-        setError(null)
-        setIsPending(false)
+        setGError(null)
+        setisLoading(false)
       }
     } catch (err) {
       if (!isCancelled) {
         console.log(err.message)
-        setError(err.message)
-        setIsPending(false)
+        setGError(err.message)
+        setisLoading(false)
       }
     }
-    setIsPending(false)
+    setisLoading(false)
   }
 
   useEffect(() => {
     return () => setIsCancelled(true)
   }, [])
 
-  return { googleSignIn, error, isPending }
+  return { googleSignIn, gError, isLoading }
 }

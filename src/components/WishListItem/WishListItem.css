@@ -11,23 +11,31 @@
 .item-name {
   width: 180px;
   white-space: nowrap; 
-  text-overflow: ellipsis; 
-  overflow: hidden;
+  overflow-y: auto;
+  cursor: grab;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+  /* text-overflow: ellipsis;  */
+}
+
+.item-name::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 @media only screen and (min-width: 768px) {
   .item-name {
-    width: 300px;
+    width: 380px;
   }
 }
 @media only screen and (min-width: 992px) {
   .item-name {
-    width: 270px;
+    width: 260px;
   }
 }
 @media only screen and (min-width: 1200px) {
   .item-name {
-    width: 360px;
+    width: 350px;
   }
 }
 

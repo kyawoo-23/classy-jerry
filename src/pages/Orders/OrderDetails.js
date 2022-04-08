@@ -51,7 +51,7 @@ export default function OrderDetails() {
         <>
           <div className='order-information mt-2 pt-3 pb-3'>
             <div className='d-flex justify-content-between'>
-              <h5 className='text-white ms-3'>Order ID : {location.state.orderId}</h5>    
+              <h5 className='text-white ms-3 order-id-details'>Order ID : {location.state.orderId}</h5>    
               <p className='text-white me-3'><b>
                 {location.state.orderDate}-{location.state.orderMonth}-{location.state.orderYear}
               </b></p>

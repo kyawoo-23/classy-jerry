@@ -5,3 +5,25 @@
 .order-information p {
   margin-bottom: 5px;
 }
+
+.order-id-details {
+  width: 200px;
+  margin-right: 5px;
+  white-space: nowrap; 
+  overflow-y: auto;
+  cursor: grab;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+  /* text-overflow: ellipsis;  */
+}
+
+.order-id-details::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .order-id-details {
+    width: 400px;
+  }
+}

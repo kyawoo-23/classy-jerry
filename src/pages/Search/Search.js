@@ -38,7 +38,7 @@ export default function Search() {
                 onChange={e => setSearchText(e.target.value)}
               />
               <Button type="submit" variant="outline-warning" id="button-addon2">
-                Button
+                Search
               </Button>
             </InputGroup>
           </Form>

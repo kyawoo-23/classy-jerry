@@ -21,15 +21,6 @@
   filter: invert(37%) sepia(1%) saturate(0%) hue-rotate(349deg) brightness(93%) contrast(96%);
 }
 
-.card-overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  padding: 1rem;
-  border-radius: .25rem;
-}
-
 .card-body {
   background-color: #F8F5F1;
 }
@@ -40,6 +31,3 @@
   line-height: 20px;
 }
 
-.card-price {
-  white-space: nowrap;
-}

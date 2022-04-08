@@ -4,14 +4,12 @@ import { Link } from 'react-router-dom'
 import Col from 'react-bootstrap/Col'
 import CloseButton from 'react-bootstrap/CloseButton'
 import Stack from 'react-bootstrap/Stack'
-import Form from 'react-bootstrap/Form'
 import { useGetDoc } from '../../hooks/useGetDoc'
 import { useFirestore } from '../../hooks/useFirestore'
 import allIcon from '../../icons/all.svg'
 
 export default function CartItem({ setTotalAmount, flag, setFlag, itemId, itemColor, itemSize, itemQty }) {
-  const { document } = useGetDoc('itemsList', itemId)
-
+  const { document } = useGetDoc('itemsList', itemId, itemColor, itemSize, itemQty, 'cart')
   const { updateAndRemoveItem } = useFirestore()
 
   useEffect(() => {
@@ -33,37 +31,34 @@ export default function CartItem({ setTotalAmount, flag, setFlag, itemId, itemCo
 
   return (
     <>
-    {document && (
-      <Col xs={12} lg={6} className='mb-4' key={itemId}>
-        <Stack className='cart-item' direction='horizontal'>
-          <Link to={`/items/${itemId}`}>
-            <img className='cart-item-img' src={document.primaryImgURL.url} alt="item img" />
-          </Link>
-          <div className='card-item-detail ms-2'>
-            <Stack>
-              <div className='card-item-detail-1'>
-                <h3 className='item-name'>{document.name}</h3>
-                <CloseButton className='me-3' variant='white' onClick={handleRemove} />
-              </div>
-              <div className='card-item-detail-2'>
-                <div className='item-color active me-3' style={{backgroundColor: itemColor}}></div>
-                <div className='item-size active'>{itemSize}</div>
-              </div>
-              <div className='card-item-detail-3 pt-2'>
-                <span className='item-price'><span>$</span>{document.price}</span>
-                <span className='item-quantity'>
-                  <img className='qty-icon' src={allIcon} alt='qty-icon'/>
-                  {itemQty}
-                </span>
-                {/* <div className='item-btn-group me-3'>
-                  <Form.Control className='item-qty' type="number" min="1" max="99" placeholder="1" onChange={handleQty} name={itemId} value={chgItemQty} />
-                </div> */}
-              </div>
-            </Stack>
-          </div>
-        </Stack>
-      </Col>
-    )}
+      {document && (
+        <Col xs={12} lg={6} className='mb-4' key={itemId}>
+          <Stack className='cart-item' direction='horizontal'>
+            <Link to={`/items/${itemId}`}>
+              <img className='cart-item-img' src={document.primaryImgURL.url} alt="item img" />
+            </Link>
+            <div className='card-item-detail ms-2'>
+              <Stack>
+                <div className='card-item-detail-1'>
+                  <h3 className='item-name'>{document.name}</h3>
+                  <CloseButton className='me-3' variant='white' onClick={handleRemove} />
+                </div>
+                <div className='card-item-detail-2'>
+                  <div className='item-color active me-3' style={{backgroundColor: itemColor}}></div>
+                  <div className='item-size active'>{itemSize}</div>
+                </div>
+                <div className='card-item-detail-3 pt-2'>
+                  <span className='item-price'><span>$</span>{document.price}</span>
+                  <span className='item-quantity'>
+                    <img className='qty-icon' src={allIcon} alt='qty-icon'/>
+                    {itemQty}
+                  </span>
+                </div>
+              </Stack>
+            </div>
+          </Stack>
+        </Col>
+      )}
     </>
   )
 }

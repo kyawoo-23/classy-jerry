@@ -1,5 +1,6 @@
 .navbar-brand {
   color: #FFB037 !important;
+  font-size: 18px !important;
 }
 
 .navbar {
@@ -8,8 +9,8 @@
 }
 
 .nav-logo {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
 }
 
 .navbar-toggler:focus {
@@ -18,8 +19,8 @@
 }
 
 .nav-icon {
-  height: 30px;
-  width: 30px;
+  height: 28px;
+  width: 28px;
   filter: invert(93%) sepia(1%) saturate(0%) hue-rotate(151deg) brightness(88%) contrast(85%);
 }
 

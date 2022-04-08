@@ -8,7 +8,7 @@ import { useGetDoc } from '../../hooks/useGetDoc'
 import { useFirestore } from '../../hooks/useFirestore'
 
 export default function WishListItem({ itemId }) {
-  const { document } = useGetDoc('itemsList', itemId)
+  const { document } = useGetDoc('itemsList', itemId, undefined, undefined, undefined, 'wishList')
   const { updateAndRemoveItem } = useFirestore()
 
   const handleRemove = () => {

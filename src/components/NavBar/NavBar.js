@@ -49,12 +49,12 @@ export default function NavBar() {
           </Nav.Link>
         </LinkContainer>
         <LinkContainer to="/wishlist">
-          <Nav.Link className='nav-link-highlight'>
+          <Nav.Link className='nav-link-highlight d-none d-md-block'>
             <img src={favIcon} className='nav-icon' alt='fav-icon'/>
           </Nav.Link>
         </LinkContainer>
         <LinkContainer to="/search">
-          <Nav.Link className='nav-link-highlight'>
+          <Nav.Link className='nav-link-highlight d-none d-md-block'>
             <img src={searchIcon} className='nav-icon' alt='search-icon'/>
           </Nav.Link>
         </LinkContainer>
@@ -103,6 +103,16 @@ export default function NavBar() {
                 <Nav.Link>
                   <img src={favIcon} className='menu-icon' alt='fav-icon'/>
                   <span className='menu-title'>Favorites</span>
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer 
+                className='menu-link'
+                to="/search" 
+                onClick={() => setShowCanvas(false)}
+              >
+                <Nav.Link>
+                  <img src={searchIcon} className='menu-icon' alt='fav-icon'/>
+                  <span className='menu-title'>Search</span>
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer 
