@@ -18,6 +18,9 @@ export default function CartItem({ setTotalAmount, flag, setFlag, itemId, itemCo
       // console.log('To add ', amount)
       setTotalAmount(prevAmount => prevAmount + amount)
       setFlag(false)
+    } 
+    if (flag === true) {
+      setFlag(false)
     }
   }, [document])
 
