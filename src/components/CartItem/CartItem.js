@@ -19,9 +19,9 @@ export default function CartItem({ setTotalAmount, flag, setFlag, itemId, itemCo
       setTotalAmount(prevAmount => prevAmount + amount)
       setFlag(false)
     } 
-    if (flag === true) {
-      setFlag(false)
-    }
+    // if (flag === true) {
+    //   setFlag(false)
+    // }
   }, [document])
 
   const handleRemove = () => {
