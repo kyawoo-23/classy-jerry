@@ -36,10 +36,12 @@ export default function NavBar() {
           aria-controls="offcanvasNavbar" 
           onClick={() => setShowCanvas(true)} 
         />
-        <Navbar.Brand className='me-auto ms-2' href="/">
-          <img className='nav-logo ms-md-3 me-2 me-md-3' src={logo} alt='logo'/>
-          Classy Jerry
-        </Navbar.Brand>
+        <LinkContainer to="/">
+          <Navbar.Brand className='me-auto ms-2'>
+            <img className='nav-logo ms-md-3 me-2 me-md-3' src={logo} alt='logo'/>
+            Classy Jerry
+          </Navbar.Brand>
+        </LinkContainer>
         <LinkContainer to="/cart">
           <Nav.Link className='nav-link-highlight d-flex align-items-start'>
             <img src={cartIcon} className='nav-icon' alt='cart-icon'/>
